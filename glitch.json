@@ -1,0 +1,9 @@
+{
+  "projectName": "inventory-management-system",
+  "startCommand": "npm start",
+  "installCommand": "npm install",
+  "framework": "node",
+  "env": {
+    "NODE_ENV": "production"
+  }
+} 
