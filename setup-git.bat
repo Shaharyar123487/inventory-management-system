@@ -34,6 +34,9 @@ git add .
 :: Create initial commit
 git commit -m "Initial commit"
 
+:: Get current branch name
+for /f "tokens=*" %%a in ('git rev-parse --abbrev-ref HEAD') do set current_branch=%%a
+
 echo.
 echo Git repository initialized and files committed.
 echo.
@@ -55,8 +58,25 @@ set /p repo_url=
 :: Add remote repository
 git remote add origin %repo_url%
 
-:: Push to GitHub
-git push -u origin main
+:: Try to push to the current branch
+echo.
+echo Pushing to GitHub...
+git push -u origin %current_branch%
+if %errorlevel% neq 0 (
+    echo.
+    echo Error: Failed to push to GitHub.
+    echo Please check:
+    echo 1. You are logged into GitHub in your browser
+    echo 2. The repository URL is correct
+    echo 3. You have write access to the repository
+    echo.
+    echo If you need to authenticate, you may need to:
+    echo 1. Set up SSH keys for GitHub, or
+    echo 2. Use a personal access token for HTTPS
+    echo.
+    pause
+    exit /b 1
+)
 
 echo.
 echo Done! Your code has been pushed to GitHub.
