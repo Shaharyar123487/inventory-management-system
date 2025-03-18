@@ -1,0 +1,9 @@
+node_modules/
+.env
+*.log
+deploy_temp.zip
+glitch_temp.zip
+deploy_temp/
+glitch_temp/
+.DS_Store
+Thumbs.db
